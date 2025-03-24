@@ -1,0 +1,392 @@
+
+/* Yucatan 2021 */
+
+/* Note: random_map.def is automatically included in every rms script */
+/* updated for ANTIQUITY_MODE November 2023 */
+
+<PLAYER_SETUP>
+  random_placement 
+	ai_info_map_type YUCATAN 0 0 0
+
+<LAND_GENERATION>
+
+
+  #define TROPICAL_MAP
+enable_waves 0 
+
+base_terrain DLC_WATER5
+
+create_player_lands 
+{            
+  terrain_type                     GRASS3
+  land_percent                     97
+  base_size                        13
+  other_zone_avoidance_distance    4 /* 6 originally */
+}
+
+/* ****************************************************** */
+<TERRAIN_GENERATION>
+if ANTIQUITY_MODE
+create_terrain MEDITERRANEAN_FOREST
+else
+create_terrain JUNGLE
+endif
+{
+  base_terrain                   GRASS3
+  spacing_to_other_terrain_types 4
+  land_percent                   22
+  number_of_clumps               38
+  set_avoid_player_start_areas     
+}
+
+if ANTIQUITY_MODE
+create_terrain MEDITERRANEAN_FOREST
+else
+create_terrain JUNGLE
+endif
+{
+  base_terrain                   GRASS3
+  spacing_to_other_terrain_types 5
+  land_percent                   1
+  number_of_clumps               20
+  set_avoid_player_start_areas     
+}
+
+/* this was removed before */
+
+/*
+create_terrain GRASS3
+{
+  base_terrain                   JUNGLE
+  spacing_to_other_terrain_types 1
+  land_percent                   7
+  number_of_clumps               19
+  set_avoid_player_start_areas     
+}
+*/
+
+/* up to here */
+
+create_terrain GRASS3
+{
+  base_terrain                   DLC_WATER5
+  spacing_to_other_terrain_types 1
+  land_percent                   3
+  number_of_clumps               10
+  set_avoid_player_start_areas     
+}
+
+
+/* PONDS FOR DA FISHIES */
+
+create_terrain DLC_WATER5
+{
+  base_terrain                   GRASS3
+  spacing_to_other_terrain_types 1
+  land_percent                   1
+  number_of_clumps               4
+  set_avoid_player_start_areas
+  set_flat_terrain_only     
+}
+
+
+   create_terrain GRASS
+{
+  base_terrain                   GRASS3
+  number_of_clumps               36
+  spacing_to_other_terrain_types 0
+  land_percent                   rnd(14,28)
+  set_scale_by_size
+}
+
+   create_terrain ROAD
+{
+  base_terrain                   GRASS
+  number_of_clumps               1000
+  spacing_to_other_terrain_types 2
+  land_percent                   100
+}
+   create_terrain GRASS3
+{
+  base_terrain                   GRASS
+  number_of_clumps               1000
+  land_percent                   100
+terrain_mask 2
+}
+   create_terrain GRASS3
+{
+  base_terrain                   GRASS
+  number_of_clumps               1000
+  land_percent                   100
+terrain_mask 2
+}
+   create_terrain GRASS
+{
+  base_terrain                   ROAD
+  number_of_clumps               1000
+  land_percent                   100
+}
+   create_terrain GRASS
+{
+  base_terrain                   ROAD
+  number_of_clumps               1000
+  land_percent                   100
+}
+
+   create_terrain LEAVES
+{
+  base_terrain                   GRASS3
+  number_of_clumps               24
+  spacing_to_other_terrain_types 0
+  land_percent                   rnd(4,8)
+  set_scale_by_size
+terrain_mask 1
+}
+
+if ANTIQUITY_MODE
+create_terrain LEAVES
+else
+create_terrain DLC_JUNGLELEAVES
+endif
+  base_terrain                   GRASS3
+  number_of_clumps               24
+  spacing_to_other_terrain_types 0
+  land_percent                   rnd(4,8)
+  set_scale_by_size
+terrain_mask 1
+}
+
+#define AZUREMASKING
+#include_drs F_WaterMasking.inc
+
+	color_correction	CC_JUNGLE
+
+<OBJECTS_GENERATION>
+
+#define GNR_NORMALTC
+#define GNR_STARTVILLS
+#define GNR_CLASSICSCOUT
+
+#define GNR_GIVERELICS
+
+#define GNR_RELICMODERN_MEDIUM
+
+#define GNR_REGICIDECLASSIC
+
+#const KERICEK 59
+
+#define GNR_DOUBLE6KER
+
+#define GNR_STARTINGGOLD
+#define GNR_STARTINGSTONE
+
+#define GNR_STARTGOLD74M
+#define GNR_STARTSTONE54CL
+#define GNR_STARTGS_0WBLOCK
+#define GNR_RESCLOSE
+
+#const HERDABLE_A 833
+#const HERDABLE_B 833
+
+#define GNR_GIVEHERD_A
+#define GNR_GIVEHERD_B
+
+#define GNR_HERD6_A
+#define GNR_HERD33_B
+
+#const HUNTABLE 65
+
+#define GNR_GIVEHUNT
+
+#define GNR_HUNT8MODERN
+
+#const LURABLE_A 822
+#const LURABLE_B 822
+
+#define GNR_GIVELURES
+#define GNR_CLASSICLURES_THREE
+
+#const PREDATOR_A 812
+#const PREDATOR_B 812
+#define GNR_CLASSICPRED
+
+#define GNR_FARGORIG_GIVE
+#define GNR_FARSORIG_GIVE
+
+#define GNR_FARGORIG_TYPE1
+#define GNR_FARSORIG_TYPE1
+
+#const STRAGGLER 351
+
+#define GNR_HOMESTRAGGLE
+
+#define GNR_ADDITIONALPRED
+
+#define GNR_MAPSTRAGGLE
+#const MELKARYBA 69
+
+#define GNR_SMALLFISHONLY
+#define GNR_SFISH_SPARSE
+
+#include_drs GeneratingObjects.inc
+
+create_object MACAW
+{
+   number_of_objects         8
+   set_scaling_to_map_size
+}
+
+if DEATH_MATCH
+elseif INFINITE_RESOURCES
+elseif EMPIRE_WARS
+else
+
+create_object JAVELINA
+{
+   number_of_objects 2
+   set_loose_grouping
+   set_gaia_object_only
+   set_place_for_every_player
+   min_distance_to_players    35
+   max_distance_to_players    40
+   min_distance_group_placement  5
+}
+if ANTIQUITY_MODE
+create_object CYPRESS_TREE
+else
+create_object PALMTREE
+endif
+{
+  number_of_objects          50
+  set_gaia_object_only
+  min_distance_to_players       6
+  min_distance_group_placement  2
+  avoid_actor_area 12
+  avoid_actor_area 14
+  avoid_actor_area 149
+  avoid_actor_area 61
+  avoid_actor_area 62
+  avoid_actor_area 63
+  avoid_actor_area 65
+  avoid_actor_area 66
+  avoid_actor_area 67  
+  avoid_forest_zone 2
+
+}
+
+endif
+
+create_object PLANTS
+{
+  number_of_objects          200
+  set_gaia_object_only
+}
+
+if DEATH_MATCH
+elseif INFINITE_RESOURCES
+elseif EMPIRE_WARS
+else
+
+if ANTIQUITY_MODE
+create_object CYPRESS_TREE
+else
+create_object JUNGLETREE
+endif
+  number_of_objects          50
+  set_gaia_object_only
+  min_distance_to_players       6
+  min_distance_group_placement  2
+  avoid_actor_area 12
+  avoid_actor_area 14
+  avoid_actor_area 149
+  avoid_actor_area 61
+  avoid_actor_area 62
+  avoid_actor_area 63
+  avoid_actor_area 65
+  avoid_actor_area 66
+  avoid_actor_area 67
+
+  avoid_forest_zone 2
+
+}
+
+endif
+
+/* ****************************************************** */
+
+<ELEVATION_GENERATION>
+
+/*
+create_elevation        4
+{
+  base_terrain 			GRASS3
+  number_of_clumps 		10
+  number_of_tiles 		2000
+  set_scale_by_groups           
+}
+*/
+
+#const LAYER_D 9
+
+#define GNRELEV_HEIGHT04
+#define GNRELEV_INTENSITY_H
+#define GNRELEV_LAY_D
+
+#include_drs GeneratingElevation.inc
+
+/* ****************************************************** */
+<CONNECTION_GENERATION>
+create_connect_all_players_land 
+{
+  replace_terrain GRASS         		GRASS
+  replace_terrain GRASS2        		GRASS2
+  replace_terrain GRASS3        		GRASS3
+  replace_terrain FOREST       			GRASS3 
+  replace_terrain JUNGLE       			GRASS3
+  replace_terrain MEDITERRANEAN_FOREST  GRASS3
+
+  terrain_cost    FOREST        2
+  terrain_cost    JUNGLE        2
+  terrain_cost    MEDITERRANEAN_FOREST        2
+  terrain_cost    GRASS         1
+  terrain_cost    GRASS2        1
+  terrain_cost    GRASS3        1
+  terrain_size    FOREST        2       1
+  terrain_size    JUNGLE        2       1   
+  terrain_size    GRASS         1       0
+  terrain_size    GRASS2        1       0
+  terrain_size    GRASS3        1       0
+}
+
+create_connect_teams_lands
+{
+  replace_terrain GRASS         GRASS
+  replace_terrain GRASS2        GRASS2
+  replace_terrain GRASS3        GRASS3
+  replace_terrain WATER         SHALLOW
+  replace_terrain MED_WATER     SHALLOW
+  replace_terrain DEEP_WATER    SHALLOW
+  replace_terrain DLC_WATER5    SHALLOW
+  replace_terrain FOREST        GRASS 
+  replace_terrain FOREST        GRASS 
+  replace_terrain MEDITERRANEAN_FOREST        GRASS3
+  terrain_cost    WATER         7
+  terrain_cost    MED_WATER     7
+  terrain_cost    DEEP_WATER    7
+  terrain_cost    DLC_WATER5 	1
+  terrain_cost    FOREST        4
+  terrain_cost    JUNGLE        4
+  terrain_cost    GRASS         2
+  terrain_cost    BEACH         4
+  terrain_size    WATER         2       1
+  terrain_size    MED_WATER     2       1
+  terrain_size    DEEP_WATER    2       1
+  terrain_size	  DLC_WATER5    2	1
+  terrain_size    GRASS         1       0
+  terrain_size    GRASS2        1       0
+  terrain_size    GRASS3        1       0
+  terrain_size    FOREST        2       1
+  terrain_size    JUNGLE        2       1
+  terrain_size    MEDITERRANEAN_FOREST        2       1
+}
+

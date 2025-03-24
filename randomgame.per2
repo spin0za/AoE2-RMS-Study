@@ -1,0 +1,57 @@
+(load "Promisory\defaultConstants")
+(load "Promisory\finalingConstants")
+(load "elite petersen constants")
+
+#load-if-not-defined BATTLE-ROYALE
+;******************************
+#load-if-defined WONDER-RACE
+
+(load "elite wonder rush")
+
+#end-if
+;******************************
+#load-if-defined DEATH-MATCH
+
+(load "elite petersen map loads")
+(load "elite petersen diplomacy")
+
+
+(load "elite petersen supplement")
+(load "elite petersen groups")
+(load "elite petersen resign")
+
+
+(load "elite petersen deathmatch")
+
+#end-if
+;******************************
+#load-if-defined DEFEND-WONDER
+
+(load "elite petersen map loads")
+(load "elite petersen diplomacy")
+
+(load "elite wonder kill")
+
+#end-if
+;******************************
+#load-if-not-defined DEATH-MATCH
+#load-if-not-defined DEFEND-WONDER
+#load-if-not-defined WONDER-RACE
+
+(load "elite petersen map loads")
+(load "elite petersen diplomacy")
+
+(load "elite petersen supplement")
+(load "elite petersen groups")
+(load "elite petersen resign")
+
+
+(load "elite AI petersen rules")
+
+#end-if
+#end-if
+#end-if
+;******************************
+#else
+(load "Promisory\finaling")
+#end-if
